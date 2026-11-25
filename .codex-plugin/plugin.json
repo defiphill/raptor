@@ -1,0 +1,21 @@
+{
+  "name": "raptor",
+  "version": "1.0.0",
+  "description": "Turns everything your AI knows about you into a lean operation (agents, skills, memory, a map), then trims it every week.",
+  "author": { "name": "defiphill", "url": "https://github.com/defiphill" },
+  "homepage": "https://github.com/defiphill/raptor",
+  "repository": "https://github.com/defiphill/raptor",
+  "license": "MIT",
+  "keywords": ["agents", "second-brain", "agents-md", "memory", "skill"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "raptor",
+    "shortDescription": "Organize your AI setup, then keep it lean.",
+    "longDescription": "Reads what your AI already knows about you (memory, session history, chat exports, rules) and builds one entry, agents with contracts, skills, memory, state and a map. Then trims it weekly: measures what loads at chat start, cleans junk, finds rules nobody follows, and proposes at most 5 cuts you approve.",
+    "developerName": "defiphill",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write", "Execute"],
+    "websiteURL": "https://github.com/defiphill/raptor",
+    "defaultPrompt": ["Run raptor.", "Organize my AI setup.", "Trim my agent rules."]
+  }
+}

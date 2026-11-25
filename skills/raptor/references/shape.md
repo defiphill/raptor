@@ -18,7 +18,7 @@ brain/
 ```
 
 ## The entry
-Short. Who, then routes: "a request about X → `agents/x/`". Global rules live here once and nowhere else. It never makes every chat read every agent.
+Short. Who (by name; never guess pronouns, use "they" unless the person stated theirs), then routes: "a request about X → `agents/x/`". Global rules live here once and nowhere else. It never makes every chat read every agent.
 
 ## An agent
 One recurring responsibility, its own context, its own deliverable. Its contract says: what it does, input, output, the checks that mean done (written before it runs), and what it must not touch. Its memory lives in files, never in a chat: when a chat gets long, open a new one in the agent's folder. It starts by preparing work for the person's approval and earns autonomy once its output passes without corrections.

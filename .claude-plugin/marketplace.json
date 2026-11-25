@@ -1,0 +1,8 @@
+{
+  "name": "raptor",
+  "description": "Turns everything your AI knows about you into a lean operation (agents, skills, memory, a map), then trims it every week.",
+  "owner": { "name": "defiphill", "url": "https://github.com/defiphill" },
+  "plugins": [
+    { "name": "raptor", "source": "./", "description": "Turns everything your AI knows about you into a lean operation (agents, skills, memory, a map), then trims it every week." }
+  ]
+}

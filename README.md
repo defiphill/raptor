@@ -1,68 +1,134 @@
-# raptor
+<p align="center">
+  <img src=".github/assets/banner.png" alt="raptor: fewer parts, more thrust. Three rocket engines: the first buried in tangled pipes, the second with fewer, the third with two clean pipes.">
+</p>
 
-**Your AI already knows how you work. Raptor turns that into an operation, then keeps it lean.**
+<p align="center">
+  <strong>Your AI already knows how you work. Raptor turns that into an operation, then keeps it lean.</strong>
+  <br>
+  One skill for Claude Code, Codex, Hermes, or any agent that loads skills. Plain markdown, no code.
+</p>
 
-Raptor 1 had every pipe on the outside. Raptor 3 makes more thrust with a fraction of the parts. Most AI setups are Raptor 1: one chat for everything, rules scattered across memory and old prompts, the same correction typed for the tenth time, a rules file that only grows.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2A2F33.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/works%20with-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Hermes-6F8A80.svg" alt="Works with Claude Code, Codex, Hermes">
+  <img src="https://img.shields.io/badge/dependencies-none-8A6B45.svg" alt="No dependencies">
+</p>
 
-Raptor is one skill for any agent that loads skills (Claude Code, Codex, Hermes, or your own) with two modes:
+<p align="center">
+  <a href="#install">Install</a> &bull;
+  <a href="#use-it">Use it</a> &bull;
+  <a href="#see-it-work">See it work</a> &bull;
+  <a href="#build-once">Build</a> &bull;
+  <a href="#trim-every-week">Trim</a>
+</p>
 
-| | **build** · once | **trim** · weekly |
-|---|---|---|
-| For | No structure yet, or a mess | A structure that keeps growing |
-| Reads | Memory, chat history, exports, rules, files | What loads at chat start, last week's sessions |
-| Does | One entry, agents with contracts, skills, state, decisions, a map | Cleans junk, fixes dead paths, finds rules nobody follows |
-| You do | Approve one 10-line plan | Answer `apply 1, 3` |
+<br>
 
-## Build: everything your AI knows, organized
+**① Build, once: everything your AI knows about you, organized.**
+Raptor reads your agent's memory and rules, your session history and your chat exports, and builds one entry, an agent for each thing you actually do, skills for what you repeat, state, decisions and a map. You approve one 10-line plan.
 
-Raptor reads what already exists: your agent's memory and rules, your session history (Claude Code, Codex, Hermes), your ChatGPT or Claude.ai export. The more you've used AI, the more it finds; it reads newest first and stops when history stops adding anything. No files at all? It hands you one prompt to paste into the chat you use most:
+**② Trim, every week: rules only grow, until you cut them.**
+It measures what every chat loads before you type, clears the junk, finds the correction you gave twice and the rule nobody follows, and hands you at most 5 cuts. You answer `apply 1, 3`.
+
+<p align="center">
+  <img src=".github/assets/before-after.png" alt="Before: a CLAUDE.md with duplicated, stale and dead rules, a memory dump and loose notes. After raptor build: a map with the person at the top, one entry, three agents (newsletter, client-work, critique), a brief skill, two projects, state and decisions.">
+</p>
+
+<br>
+
+## Install
+
+**Claude Code**
+
+```bash
+/plugin marketplace add defiphill/raptor
+/plugin install raptor@raptor
+```
+
+**Codex**
+
+```bash
+codex plugin marketplace add defiphill/raptor
+codex plugin add raptor@raptor
+```
+
+**Any other agent** (Hermes, Cursor, Gemini CLI, opencode and more), via the [`skills`](https://github.com/vercel-labs/skills) CLI:
+
+```bash
+npx skills add https://github.com/defiphill/raptor --skill raptor
+```
+
+<details>
+<summary>No installer? Copy the folder.</summary>
+
+```bash
+git clone https://github.com/defiphill/raptor /tmp/raptor
+cp -R /tmp/raptor/skills/raptor ~/.claude/skills/raptor                 # Claude Code
+cp -R /tmp/raptor/skills/raptor ~/.codex/skills/raptor                  # Codex
+cp -R /tmp/raptor/skills/raptor ~/.hermes/skills/productivity/raptor    # Hermes
+```
+
+Or point any agent at `skills/raptor/SKILL.md` and say "run this here".
+</details>
+
+## Use it
+
+Open your agent in the folder you want organized and say:
+
+```text
+run raptor
+```
+
+It picks the mode. No entry that routes to agents yet: **build**. Already have one: **trim**. Run it again every week; Friday works.
+
+No files at all, only a chat app? Raptor hands you one prompt to paste there:
 
 > List everything you know about me: who I am, my work and projects, the tools I use, how I like things done, the corrections I gave you more than once, and what I keep asking you to do.
 
-From that it finds your recurring responsibilities, your methods, your rules (including the ones you only ever said as a correction) and your open work, and builds this:
+Paste the answer back and build starts from that.
+
+## See it work
+
+[`examples/sam`](examples/sam) is a real run. Sam is fictional; everything else is what raptor produced.
+
+- **Before:** a 194-word `CLAUDE.md` with rules said three times, a rate that changed in March, a tool dropped in August and rules for a shipped project. Plus a memory dump and loose notes.
+- **After:** [`brain/`](examples/sam/after/brain) with an entry, three agents with contracts, memory and corrections, one skill, two projects, state, decisions and the map above. The old `CLAUDE.md` is one line: `@brain/AGENTS.md`.
+- **Settled on its own:** the old rate, the dropped tool, the shipped project, spelling rules that depend on the audience.
+- **Asked Sam:** one thing no date or scope settled (900 vs 1,000 words).
+- **Proof:** a fresh agent got only the entry file and four real requests. [Result](examples/sam/after/PROOF.md).
+
+## Build, once
+
+1. **Gathers** memory and rules files, session history (Claude Code, Codex, Hermes), ChatGPT or Claude.ai exports, the folder itself. Newest first; it stops when history stops adding anything.
+2. **Extracts** who you are, each recurring job, every rule (including the ones you only ever said as a correction), methods you repeat, and open work. Dated changes and dead tools are settled; only true conflicts reach you.
+3. **Plans** in 10 lines: agents, skills, what moves where, every file it will touch outside the new folder. You say go.
+4. **Builds** the shape below, splits mixed notes by function, fixes every reference, and bridges each agent you use (`CLAUDE.md` → `@AGENTS.md`).
+5. **Proves** it: an agent given only the new entry must route real past requests to the right agent with the right rules.
 
 ```
 brain/
-  AGENTS.md          one entry: who you are, which agent handles what
-  Map.canvas         your whole operation on one screen
+  AGENTS.md          who you are, which agent handles what, global rules once
+  Map.canvas         the whole operation on one screen (Obsidian, optional)
   State.md           live, blocked, next
   Decisions.md       numbered, dated
-  agents/writer/
+  agents/<name>/
     AGENTS.md        contract: input, output, checks that mean done, what not to touch
     memory.md        every open item it owns
     cases.md         every correction you gave it, so you never give it twice
     skills/
+  projects/<name>.md handoff in 30 lines or less
 ```
 
-Then it walks three of your real past requests through the new entry, from a fresh chat, and fixes the structure until each lands on the right agent with the right rules.
+Open `brain/` in [Obsidian](https://obsidian.md) and it's a second brain with a live map. Skip Obsidian and it still works: it's all markdown.
 
-It's all plain markdown. Open the folder in [Obsidian](https://obsidian.md) and it's a second brain with a live map; skip Obsidian and it still works.
+The shape comes from the author's own setup: one entry and four agents, in daily use since October 2026.
 
-The shape is not theory: it's the author's own setup, one entry and four agents with their own memory and corrections, in daily use since October 2026.
+## Trim, every week
 
-## Trim: rules only grow, until you cut them
-
-Every mistake adds a rule. Nobody removes one. Six months in, each chat opens by reading thousands of words of instructions for tools you dropped and bugs that got fixed, and dead rules compete with the ones that matter.
-
-Every week, trim:
-
-1. **Measures** everything loaded at chat start and names the file that grew.
-2. **Fixes on its own:** shrinks handoffs to live work + next step, trashes `*.bak` / `* copy*` / empty folders nothing points to, repairs dead paths.
-3. **Checks:** mines last week's sessions for the correction you gave twice, the wrong skill, the method redone by hand; holds rules against their evidence.
+1. **Measures** every word loaded at chat start and names the file that grew this week.
+2. **Fixes on its own:** handoffs back to live work and next step, duplicate and empty files to the Trash, dead paths repaired.
+3. **Checks** last week's sessions: the correction given twice, the wrong skill, the method redone by hand, the rule its own evidence says is broken.
 4. **Proposes** at most 5 cuts, each with file, current text, new text and evidence.
-
-A real run on the author's setup:
-
-```
-Words loaded at start: 8,274 → 6,866  (-17%)
-Removed: rules for a retired agent, an old model-rotation scheme,
-         a "safe zone" policy nothing used anymore
-Not followed: none this week
-```
-
-Three rules about things that no longer existed, read at the start of every chat. An agent that reads a dead rule can follow it.
-
-A proposal looks like this:
 
 ```
 2. AGENTS.md, "Model rotation" (212 words)
@@ -72,39 +138,21 @@ A proposal looks like this:
             shows zero rotations in 30 days (logs/subagents.log)
 ```
 
-You type `apply 2`. Done.
+A real run on the author's setup took startup reading from 8,274 to 6,866 words by removing rules for a retired agent, an old model-rotation scheme and a policy nothing used. Tokens were never the point: an agent that reads a dead rule can follow it.
 
-## Install
+## Three promises
 
-Markdown only. No code, no dependencies, no extra services: your files stay where they are, and only your agent's own model sees what it reads.
+- **Nothing lost.** No rule, decision, open task or unique fact is dropped without proof it's dead. Build snapshots first; removals go to the Trash, never `rm`, and every path is listed.
+- **No new power.** Raptor never grants a permission to pay, send, publish or touch production. In a git repo it never commits or pushes.
+- **You decide.** Build waits for one OK on the plan. Trim never edits a rule without your `apply`.
 
-```bash
-# Claude Code
-git clone https://github.com/defiphill/raptor ~/.claude/skills/raptor
-```
+## What's in this repo
 
-```bash
-# Codex
-git clone https://github.com/defiphill/raptor ~/.codex/skills/raptor
-```
-
-```bash
-# Hermes
-git clone https://github.com/defiphill/raptor ~/.hermes/skills/productivity/raptor
-```
-
-Any other agent: clone it where it loads skills, or tell it "read raptor/SKILL.md and run it here".
-
-Then, in the folder you want organized, ask your agent to "run the raptor skill" (`/raptor` in Claude Code). It picks the mode: build if there's no structure yet, trim if there is. Run trim weekly; Friday works. On a schedule with nobody around, it cleans and measures, then leaves the proposals for your next chat.
-
-## Safety
-
-- Build shows you the plan in 10 lines, including every file it will touch outside the new folder, and waits for one OK. It snapshots your rules, memory and state before moving anything.
-- Trim never edits a rule or memory file without your `apply`.
-- Never opens secrets, never grants a new permission to pay, send, publish or touch production.
-- Never `rm`: removals go to the Trash, and every removed path is in the report. In a git repo, changes stay uncommitted for you to review.
-- Never drops a rule, decision, open task or unique fact without proof it's dead. When two of your rules disagree, it asks you instead of picking one.
+- `skills/raptor/`: the skill (`SKILL.md`) and its references: `build.md`, `trim.md`, `shape.md`
+- `examples/sam/`: a full build run, before and after
+- `.claude-plugin/`, `.codex-plugin/`: plugin manifests for Claude Code and Codex
+- `.claude/skills/`, `.agents/skills/`: symlinks so agents discover the skill in place
 
 ## License
 
-MIT
+[MIT](LICENSE)

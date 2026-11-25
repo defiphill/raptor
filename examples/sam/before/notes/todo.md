@@ -1,0 +1,6 @@
+- [ ] finish Fernway case study (outcome section + images)
+- [ ] issue #48 bottom sheets, draft in notes/48-bottom-sheets.md
+- [ ] decide paid tier?? ask a few readers first
+- [ ] raise rate to 3600 in Jan, tell current clients in Dec
+- [x] Brightloop final handoff
+- [x] issue #47 sent

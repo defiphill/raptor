@@ -1,0 +1,150 @@
+{
+ "nodes": [
+  {
+   "id": "sam",
+   "type": "text",
+   "text": "# Sam\nFreelance product designer, Lisbon. Client work + Small Screens newsletter.",
+   "x": 400,
+   "y": 0,
+   "width": 320,
+   "height": 130
+  },
+  {
+   "id": "entry",
+   "type": "text",
+   "text": "# brain/AGENTS.md\nEntry: routes each request to an agent and holds the global rules.",
+   "x": 400,
+   "y": 200,
+   "width": 320,
+   "height": 130
+  },
+  {
+   "id": "state",
+   "type": "text",
+   "text": "# State.md\nLive, next and blocked items.",
+   "x": 900,
+   "y": 200,
+   "width": 300,
+   "height": 130
+  },
+  {
+   "id": "dec",
+   "type": "text",
+   "text": "# Decisions.md\nNumbered, dated choices and the open conflict.",
+   "x": 1300,
+   "y": 200,
+   "width": 300,
+   "height": 130
+  },
+  {
+   "id": "news",
+   "type": "text",
+   "text": "# newsletter\nTightens the weekly Small Screens draft and gives 3 subject lines.",
+   "x": 0,
+   "y": 420,
+   "width": 320,
+   "height": 130
+  },
+  {
+   "id": "cw",
+   "type": "text",
+   "text": "# client-work\nBriefs, proposals, invoices and case studies. Never sends.",
+   "x": 400,
+   "y": 420,
+   "width": 320,
+   "height": 130
+  },
+  {
+   "id": "crit",
+   "type": "text",
+   "text": "# critique\nBlunt Figma feedback ranked by impact.",
+   "x": 800,
+   "y": 420,
+   "width": 320,
+   "height": 130
+  },
+  {
+   "id": "skill",
+   "type": "text",
+   "text": "# skill: brief-structure\nOne structure for briefs and case studies.",
+   "x": 400,
+   "y": 640,
+   "width": 320,
+   "height": 130
+  },
+  {
+   "id": "fern",
+   "type": "text",
+   "text": "# project: Fernway\nLive. Case study half written.",
+   "x": 800,
+   "y": 640,
+   "width": 320,
+   "height": 130
+  },
+  {
+   "id": "bright",
+   "type": "text",
+   "text": "# project: Brightloop\nClosed. Tokens and export rules kept.",
+   "x": 1200,
+   "y": 640,
+   "width": 320,
+   "height": 130
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "fromNode": "sam",
+   "toNode": "entry",
+   "label": "asks"
+  },
+  {
+   "id": "e2",
+   "fromNode": "entry",
+   "toNode": "news",
+   "label": "newsletter"
+  },
+  {
+   "id": "e3",
+   "fromNode": "entry",
+   "toNode": "cw",
+   "label": "clients"
+  },
+  {
+   "id": "e4",
+   "fromNode": "entry",
+   "toNode": "crit",
+   "label": "feedback"
+  },
+  {
+   "id": "e5",
+   "fromNode": "entry",
+   "toNode": "state",
+   "label": "open items"
+  },
+  {
+   "id": "e6",
+   "fromNode": "entry",
+   "toNode": "dec",
+   "label": "choices"
+  },
+  {
+   "id": "e7",
+   "fromNode": "cw",
+   "toNode": "skill",
+   "label": "uses"
+  },
+  {
+   "id": "e8",
+   "fromNode": "cw",
+   "toNode": "fern",
+   "label": "owns"
+  },
+  {
+   "id": "e9",
+   "fromNode": "cw",
+   "toNode": "bright",
+   "label": "archive"
+  }
+ ]
+}

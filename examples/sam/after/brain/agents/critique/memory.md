@@ -1,0 +1,2 @@
+# critique memory
+- Nothing open.

@@ -11,7 +11,7 @@ Use every source that exists; skip the ones that do not.
   > List everything you know about me: who I am, my work and projects, the tools I use, how I like things done, the corrections I gave you more than once, and what I keep asking you to do. Be exhaustive and quote me where you can.
 - **Files:** the folder they work in, if any.
 
-Extract, citing the source of each item. If two sources disagree, keep both and mark CONFLICT for the person; never pick one silently.
+Extract, citing the source of each item. When sources differ, settle it yourself first: a dated change wins over the old value ("since March" beats the old rate), something the person stopped using is dead, and two rules for different contexts are both kept with their scope. Only what no date, scope or later statement settles is a CONFLICT for the person: keep both, never pick one silently, and keep the list short.
 - **Who:** role, goals, people they work with, language and tone.
 - **Work:** each recurring responsibility, its trigger, inputs, output, where it ends up, and who decides.
 - **Rules:** every preference, limit and authorization, with scope and exceptions. Repeated corrections count as rules.

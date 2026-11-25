@@ -1,0 +1,10 @@
+{
+  "name": "raptor",
+  "description": "Turns everything your AI knows about you into a lean operation (agents, skills, memory, a map), then trims it every week.",
+  "version": "1.0.0",
+  "author": { "name": "defiphill", "url": "https://github.com/defiphill" },
+  "license": "MIT",
+  "homepage": "https://github.com/defiphill/raptor",
+  "repository": "https://github.com/defiphill/raptor",
+  "keywords": ["agents", "second-brain", "claude-md", "agents-md", "memory", "skill"]
+}
