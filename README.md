@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2A2F33.svg" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/works%20with-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Hermes-6F8A80.svg" alt="Works with Claude Code, Codex, Hermes">
-  <img src="https://img.shields.io/badge/dependencies-none-8A6B45.svg" alt="No dependencies">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/works%20with-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Hermes-9a3412.svg" alt="Works with Claude Code, Codex, Hermes">
+  <img src="https://img.shields.io/badge/dependencies-none-4a4a47.svg" alt="No dependencies">
 </p>
 
 <p align="center">
