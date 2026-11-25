@@ -31,7 +31,9 @@ Raptor reads your agent's memory and rules, your session history and your chat e
 It measures what every chat loads before you type, clears the junk, finds the correction you gave twice and the rule nobody follows, and hands you at most 5 cuts. You answer `apply 1, 3`.
 
 <p align="center">
-  <img src=".github/assets/before-after.png" alt="Before: a CLAUDE.md with duplicated, stale and dead rules, a memory dump and loose notes. After raptor build: a map with the person at the top, one entry, three agents (newsletter, client-work, critique), a brief skill, two projects, state and decisions.">
+  <img src=".github/assets/map.png" alt="The map raptor built for Sam: Sam at the top, one entry (brain/AGENTS.md) linked to State and Decisions, three agents (newsletter, client-work, critique), a brief-structure skill and two projects, Fernway and Brightloop.">
+  <br>
+  <sub>A real build run: <a href="examples/sam">Sam</a>'s scattered setup, after one <code>run raptor</code>.</sub>
 </p>
 
 <br>
@@ -91,11 +93,22 @@ Paste the answer back and build starts from that.
 
 [`examples/sam`](examples/sam) is a real run. Sam is fictional; everything else is what raptor produced.
 
-- **Before:** a 194-word `CLAUDE.md` with rules said three times, a rate that changed in March, a tool dropped in August and rules for a shipped project. Plus a memory dump and loose notes.
+**Before:** a 194-word `CLAUDE.md`, a memory dump and loose notes.
+
+| File | Problem |
+|---|---|
+| `CLAUDE.md` | "be concise" 3 times, the em-dash rule twice |
+| `CLAUDE.md` | rate €2,800, but it's been €3,200 since March |
+| `CLAUDE.md` | logs every task to Linear, dropped in August |
+| `CLAUDE.md` | rules for Brightloop, a project that shipped |
+| `memory-dump.md` | 4 corrections given more than once, written nowhere |
+| `notes/todo.md` | open work no agent owns |
+| `notes/` | a duplicate brief, an empty `.bak`, an empty archive folder |
+
 - **After:** [`brain/`](examples/sam/after/brain) with an entry, three agents with contracts, memory and corrections, one skill, two projects, state, decisions and the map above. The old `CLAUDE.md` is one line: `@brain/AGENTS.md`.
 - **Settled on its own:** the old rate, the dropped tool, the shipped project, spelling rules that depend on the audience.
 - **Asked Sam:** one thing no date or scope settled (900 vs 1,000 words).
-- **Proof:** a fresh agent got only the entry file and four real requests. [Result](examples/sam/after/PROOF.md).
+- **Proof:** a fresh agent got only the entry file and four real requests: 4 of 4 reached the right agent with the right rules, and it caught one thing the build got wrong. [Result](examples/sam/after/PROOF.md).
 
 ## Build, once
 
