@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/assets/banner.png" alt="raptor: fewer parts, more thrust. Three rocket engines: the first buried in tangled pipes, the second with fewer, the third with two clean pipes.">
+  <img src=".github/assets/raptor-banner.png" alt="raptor: fewer parts, more thrust. A pixel field that starts as hundreds of noisy cells on the left and resolves into a few clean blocks on the right.">
 </p>
 
 <p align="center">
@@ -31,7 +31,7 @@ Raptor reads your agent's memory and rules, your session history and your chat e
 It measures what every chat loads before you type, clears the junk, finds the correction you gave twice and the rule nobody follows, and hands you at most 5 cuts. You answer `apply 1, 3`.
 
 <p align="center">
-  <img src=".github/assets/map.png" alt="The map raptor built for Sam: Sam at the top, one entry (brain/AGENTS.md) linked to State and Decisions, three agents (newsletter, client-work, critique), a brief-structure skill and two projects, Fernway and Brightloop.">
+  <img src=".github/assets/raptor-map.png" alt="The map raptor built for Sam: Sam at the top, one entry (brain/AGENTS.md) linked to State and Decisions, three agents (newsletter, client-work, critique), a brief-structure skill and two projects, Fernway and Brightloop.">
   <br>
   <sub>A real build run: <a href="examples/sam">Sam</a>'s scattered setup, after one <code>run raptor</code>.</sub>
 </p>
