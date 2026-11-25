@@ -1,39 +1,57 @@
 # raptor
 
-**Your agent reads every rule you ever wrote, every single chat. Raptor cuts the dead ones.**
+**Your AI already knows how you work. Raptor turns that into an operation, then keeps it lean.**
 
-A skill for any agent that runs on rule files: Claude Code, Codex, Hermes, or your own. Once a week it trims your setup (`AGENTS.md`, `CLAUDE.md`, memory, handoffs): it measures what loads at chat start, deletes the obvious junk on its own, checks which rules are actually followed, and hands you at most 5 cuts to approve.
+Raptor 1 had every pipe on the outside. Raptor 3 makes more thrust with a fraction of the parts. Most AI setups are Raptor 1: one chat for everything, rules scattered across memory and old prompts, the same correction typed for the tenth time, a rules file that only grows.
 
-```
-run raptor
-```
+Raptor is one skill for any agent that loads skills (Claude Code, Codex, Hermes, or your own) with two modes:
 
-## The problem
-
-Every time an agent makes a mistake, you add a rule. Nobody ever removes one.
-
-Six months in, each new chat opens by reading 8,000 words of instructions: rules for tools you dropped, workarounds for bugs that got fixed, handoffs from projects that shipped, three paragraphs that say the same thing. The agent pays for all of it before you type a word, and the more it reads, the less of it it follows.
-
-Then you start fixing that by hand. You spend your evenings tuning the system instead of building with it.
-
-## The fix
-
-Named after SpaceX's Raptor engine: version 3 has fewer parts than version 1 and more thrust. Same idea.
-
-Raptor only removes. It never adds a rule, a file, a script or a job.
-
-| Step | What it does | Asks you? |
+| | **build** · once | **trim** · weekly |
 |---|---|---|
-| **1. Measure** | `wc -w` of everything loaded at chat start: global rules, `@` imports, memory index, project rules, handoffs. Before → after, and which file grew this week. | No |
-| **2. Fix** | Shrinks handoffs over 30 lines to live work + next step. Trashes empty folders and `*.bak` / `* copy*` / `*.old` files nothing points to. Repairs or removes dead paths. | No |
-| **3. Check** | Holds rules against their evidence: subagent logs, stale branches, the same correction logged twice in a week. A rule that keeps getting broken is not working. | No |
-| **4. Propose** | At most 5 numbered cuts, ranked by words saved, then risk. Each shows file, current text, new text and the evidence. | **Yes** |
+| For | No structure yet, or a mess | A structure that keeps growing |
+| Reads | Memory, chat history, exports, rules, files | What loads at chat start, last week's sessions |
+| Does | One entry, agents with contracts, skills, state, decisions, a map | Cleans junk, fixes dead paths, finds rules nobody follows |
+| You do | Approve one 10-line plan | Answer `apply 1, 3` |
 
-You answer `apply 1, 3`. It applies exactly those and nothing else.
+## Build: everything your AI knows, organized
 
-## Real run
+Raptor reads what already exists: your agent's memory and rules, your session history (Claude Code, Codex, Hermes), your ChatGPT or Claude.ai export. The more you've used AI, the more it finds; it reads newest first and stops when history stops adding anything. No files at all? It hands you one prompt to paste into the chat you use most:
 
-A personal agent setup, one Friday:
+> List everything you know about me: who I am, my work and projects, the tools I use, how I like things done, the corrections I gave you more than once, and what I keep asking you to do.
+
+From that it finds your recurring responsibilities, your methods, your rules (including the ones you only ever said as a correction) and your open work, and builds this:
+
+```
+brain/
+  AGENTS.md          one entry: who you are, which agent handles what
+  Map.canvas         your whole operation on one screen
+  State.md           live, blocked, next
+  Decisions.md       numbered, dated
+  agents/writer/
+    AGENTS.md        contract: input, output, checks that mean done, what not to touch
+    memory.md        every open item it owns
+    cases.md         every correction you gave it, so you never give it twice
+    skills/
+```
+
+Then it walks three of your real past requests through the new entry, from a fresh chat, and fixes the structure until each lands on the right agent with the right rules.
+
+It's all plain markdown. Open the folder in [Obsidian](https://obsidian.md) and it's a second brain with a live map; skip Obsidian and it still works.
+
+The shape is not theory: it's the author's own setup, one entry and four agents with their own memory and corrections, in daily use since October 2026.
+
+## Trim: rules only grow, until you cut them
+
+Every mistake adds a rule. Nobody removes one. Six months in, each chat opens by reading thousands of words of instructions for tools you dropped and bugs that got fixed, and dead rules compete with the ones that matter.
+
+Every week, trim:
+
+1. **Measures** everything loaded at chat start and names the file that grew.
+2. **Fixes on its own:** shrinks handoffs to live work + next step, trashes `*.bak` / `* copy*` / empty folders nothing points to, repairs dead paths.
+3. **Checks:** mines last week's sessions for the correction you gave twice, the wrong skill, the method redone by hand; holds rules against their evidence.
+4. **Proposes** at most 5 cuts, each with file, current text, new text and evidence.
+
+A real run on the author's setup:
 
 ```
 Words loaded at start: 8,274 → 6,866  (-17%)
@@ -42,7 +60,7 @@ Removed: rules for a retired agent, an old model-rotation scheme,
 Not followed: none this week
 ```
 
-The win is not the tokens. It is three rules about things that no longer existed, loaded into every chat, competing for attention with the rules that matter. Dead rules don't just cost space: an agent that reads them can follow them.
+Three rules about things that no longer existed, read at the start of every chat. An agent that reads a dead rule can follow it.
 
 A proposal looks like this:
 
@@ -54,11 +72,11 @@ A proposal looks like this:
             shows zero rotations in 30 days (logs/subagents.log)
 ```
 
-You read five of these, type `apply 2, 4`, done.
+You type `apply 2`. Done.
 
 ## Install
 
-One markdown file, no code, no dependencies. Clone it into your agent's skills folder:
+Markdown only. No code, no dependencies, no extra services: your files stay where they are, and only your agent's own model sees what it reads.
 
 ```bash
 # Claude Code
@@ -75,22 +93,17 @@ git clone https://github.com/defiphill/raptor ~/.codex/skills/raptor
 git clone https://github.com/defiphill/raptor ~/.hermes/skills/productivity/raptor
 ```
 
-Any other agent: put `SKILL.md` wherever it loads skills from, or just point it at the file: "read SKILL.md and run it here".
+Any other agent: clone it where it loads skills, or tell it "read raptor/SKILL.md and run it here".
 
-Then, inside the project you want trimmed, ask it to run raptor (`/raptor` in Claude Code). Run it weekly; Friday works.
+Then, in the folder you want organized, ask your agent to "run the raptor skill" (`/raptor` in Claude Code). It picks the mode: build if there's no structure yet, trim if there is. Run trim weekly; Friday works. On a schedule with nobody around, it cleans and measures, then leaves the proposals for your next chat.
 
 ## Safety
 
-- Never edits a rule or memory file without your approval in the same chat.
-- Never touches secrets, hooks, code, or anything outside the project.
-- Never commits, pushes or deletes branches. In a git repo, everything it does is an uncommitted diff you can review or `git restore`.
-- Deletes go to the Trash, never `rm`.
-- Never pads the list: a clean week gets a one-line report.
-- Any proposal that changes who or what may be sent, spent, published or accessed is flagged **AUTHORITY**.
-
-## Custom setups
-
-Raptor finds your rules by reading your `CLAUDE.md` / `AGENTS.md` chain. If your setup is unusual, drop a `RAPTOR.md` in the project root listing your rules, handoffs, map and logs. It wins over discovery.
+- Build shows you the plan in 10 lines, including every file it will touch outside the new folder, and waits for one OK. It snapshots your rules, memory and state before moving anything.
+- Trim never edits a rule or memory file without your `apply`.
+- Never opens secrets, never grants a new permission to pay, send, publish or touch production.
+- Never `rm`: removals go to the Trash, and every removed path is in the report. In a git repo, changes stay uncommitted for you to review.
+- Never drops a rule, decision, open task or unique fact without proof it's dead. When two of your rules disagree, it asks you instead of picking one.
 
 ## License
 
